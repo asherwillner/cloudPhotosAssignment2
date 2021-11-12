@@ -49,5 +49,5 @@ Resources:
           Type: S3
           Properties:
             Bucket:
-              Ref: !Ref photosBucket2
+              Ref: !Ref "photosBucket2"
             Events: s3:ObjectCreated:Put
