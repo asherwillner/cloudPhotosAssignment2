@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   version: "2021-11-12T16:26:02Z"
-  title: "HW2-API"
+  title: "HW2-API-2"
 host: "9v4am5cs5b.execute-api.us-east-1.amazonaws.com"
 basePath: "/Alpha"
 schemes:
