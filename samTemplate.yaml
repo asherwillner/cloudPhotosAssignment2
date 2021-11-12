@@ -12,6 +12,7 @@ Resources:
     Properties:
       Handler: lambda_function.lambda_handler
       Runtime: python3.9
+      FunctionName: searchphotos
       CodeUri: ./search-photos
       Description: ''
       MemorySize: 128
