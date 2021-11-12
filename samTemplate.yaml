@@ -27,8 +27,7 @@ Resources:
             RestApiId: !Ref "PhotosApiGateway"
             Path: /search
             Method: GET
-  photosBucket2:
-    Type: AWS::S3::Bucket
+
   indexphotos:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -48,6 +47,7 @@ Resources:
         BucketEvent1:
           Type: S3
           Properties:
-            Bucket:
-              Ref: !Ref "photosBucket2"
-            Events: s3:ObjectCreated:Put
+            Bucket: !Ref photosBucket2
+            Events: s3:ObjectCreated:*
+  photosBucket2:
+    Type: AWS::S3::Bucket
