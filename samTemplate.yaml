@@ -17,7 +17,6 @@ Resources:
       Description: ''
       MemorySize: 128
       Timeout: 3
-      # Role: 'arn:aws:iam::586369390114:role/service-role/search-photos-role-tu4ve7f4'
       Policies:
         - AmazonLexFullAccess
       Events:
@@ -27,7 +26,6 @@ Resources:
             RestApiId: !Ref "PhotosApiGateway"
             Path: /search
             Method: GET
-
   indexphotos:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -38,16 +36,16 @@ Resources:
       Description: ''
       MemorySize: 128
       Timeout: 3
-      # Role: 'arn:aws:iam::586369390114:role/service-role/index-photos-role-z00lemnp'
       Policies:
         - AmazonS3FullAccess
         - AmazonLexFullAccess
         - AmazonRekognitionFullAccess
       Events:
-        BucketEvent1:
+        FileUpload:
           Type: S3
           Properties:
-            Bucket: !Ref photosBucket2
+            Bucket: !Ref "photosBucket2"
             Events: s3:ObjectCreated:*
+
   photosBucket2:
     Type: AWS::S3::Bucket
