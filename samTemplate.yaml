@@ -27,8 +27,7 @@ Resources:
             Path: /search
             Method: GET
 
-  photospipelinebucket:
-    Type: AWS::S3::Bucket
+
 
   indexphotos:
     Type: 'AWS::Serverless::Function'
@@ -45,8 +44,15 @@ Resources:
         - AmazonLexFullAccess
         - AmazonRekognitionFullAccess
       Events:
-        FileUpload:
+        BucketEvent1:
           Type: S3
           Properties:
-            Bucket: !Ref "photospipelinebucket"
-            Events: s3:ObjectCreated:*
+            Bucket:
+              Ref: Bucket1
+            Events:
+              - 's3:ObjectCreated:Put'
+              
+  Bucket1:
+    Type: 'AWS::S3::Bucket'
+    proerties:
+      BucketName: myBucket
