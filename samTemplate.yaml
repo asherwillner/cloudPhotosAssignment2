@@ -26,6 +26,10 @@ Resources:
             RestApiId: !Ref "PhotosApiGateway"
             Path: /search
             Method: GET
+
+  photospipelinebucket:
+    Type: AWS::S3::Bucket
+
   indexphotos:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -44,10 +48,5 @@ Resources:
         FileUpload:
           Type: S3
           Properties:
-            Bucket: !Ref "photosbucket3"
+            Bucket: !Ref "photospipelinebucket"
             Events: s3:ObjectCreated:*
-
-  photosbucket3:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: photosbucket3
