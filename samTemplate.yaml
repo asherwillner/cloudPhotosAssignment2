@@ -27,7 +27,32 @@ Resources:
             Path: /search
             Method: GET
 
+  ImageBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders:
+              - "*"
+            AllowedMethods:
+              - HEAD
+              - GET
+              - PUT
+              - POST
+            AllowedOrigins:
+              - "*"
 
+  ImageBucketPublicReadPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref ImageBucket
+      PolicyDocument:
+        Statement:
+          - Action: s3:GetObject
+            Effect: Allow
+            Principal: "*"
+            Resource: !Join ["", ["arn:aws:s3:::", !Ref "ImageBucket", "/*" ]]
 
   indexphotos:
     Type: 'AWS::Serverless::Function'
@@ -44,15 +69,8 @@ Resources:
         - AmazonLexFullAccess
         - AmazonRekognitionFullAccess
       Events:
-        BucketEvent1:
+        ExtractTags:
           Type: S3
           Properties:
-            Bucket:
-              Ref: Bucket1
-            Events:
-              - 's3:ObjectCreated:Put'
-              
-  Bucket1:
-    Type: 'AWS::S3::Bucket'
-    proerties:
-      BucketName: myBucket
+            Bucket: !Ref ImageBucket
+            Events: s3:ObjectCreated:*
