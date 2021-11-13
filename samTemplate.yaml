@@ -44,10 +44,10 @@ Resources:
         FileUpload:
           Type: S3
           Properties:
-            Bucket: !Ref photosBucket2
+            Bucket: !Ref photosbucket2
             Events: s3:ObjectCreated:*
 
-  photosBucket2:
+  photosbucket2:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: photoBucket2
+      BucketName: photobucket2
