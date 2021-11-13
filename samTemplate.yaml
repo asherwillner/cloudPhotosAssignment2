@@ -50,4 +50,4 @@ Resources:
   photosbucket2:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: photobucket2
+      BucketName: photosbucket2
